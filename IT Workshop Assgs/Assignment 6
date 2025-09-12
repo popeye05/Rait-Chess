@@ -1,0 +1,15 @@
+#Functions in Python------------------------------------------------------------------------
+def f1(): #This is how we define a function in python; Here f1 doesnt   accept any parameter
+    print("Hello") 
+f1()
+def f2(name):
+    print(name)
+f2("Swarnab") #This accepts a single parameter
+#Now,lets see a fx which returns a value.
+def sqrx(x):
+    x=x**2
+    return x
+print(sqrx(69))
+#-----------------------------------------------------------------------------------------------
+
+
