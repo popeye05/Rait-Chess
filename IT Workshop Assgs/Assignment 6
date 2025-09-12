@@ -62,22 +62,32 @@ print(gcdlcm(24,8))
 #With using gcd, to compute lcm
 print("LCM is: ",(24*8)//gcdlcm(24,8))
 #LCM without using gcd
-def lcm(a,b,i=2):
+def lcm(a,b,i=2,res=1):
     n = max(a,b)
     if i==n:
-        return a*b
+        return a*b*res
     else:
         if a%i==0 and b%i!=0:
-            return lcm(a//i,b,i)
+            return lcm(a//i,b,i,res*i)
         elif a%i!=0 and b%i==0:
-            return lcm(a,b//i,i)
+            return lcm(a,b//i,i,res*i)
         elif a%i==0 and b%i==0:
-                return lcm(a//i,b//i,i)
+                return lcm(a//i,b//i,i, res*i)
         elif a%i!=0 and b%i!=0:
-            return lcm(a,b,i+1)
-print("My LCM fx returns:",lcm(24,8))
-
+            return lcm(a,b,i+1,res)
         
+#LCM alternative method (Iterative)
+'''
+def lcm(a,b):
+    n = max(a,b)
+    while True:
+       if  n%a ==0 and n%b==0:
+            return n
+       n+=max(a,b)
+       
+print("LCM is:",lcm(m,n))
+
+'''   
 
     
 
