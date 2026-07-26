@@ -7,10 +7,10 @@ from groq import Groq
 #Loading env + creating board + opening engine
 load_dotenv()
 #1st the Stockfish
-STOCKFISH_PATH = r"d:\stockfish\stockfish-windows-x86-64-avx2.exe"
+STOCKFISH_PATH = os.environ.get("STOCKFISH_PATH")
 #Now This is The MAIA one w/ LC0
-LC0_PATH = r"d:\Leela Chess Zero\lc0.exe"
-MAIA_WEIGHTS = r"D:\Leela Chess Zero\ckpt-40-400000.pb.gz"
+LC0_PATH = os.environ.get("LC0_PATH")
+MAIA_WEIGHTS = os.environ.get("MAIA_WEIGHTS")
 
 
 #now activating this engine
