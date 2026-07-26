@@ -22,3 +22,14 @@
 This replaced the test moves with the actual ones, and thats it, and now I'll move to the next step, which is nothing but the Phase 4
 
 # Phase 4: FastAPI
+Ok, This was a little hard step, and a lot of things was unknown so I had to take the help of Claude, But thats sill me coding almost 80% of it... But Yeah.. took the help, and did it!
+1. Imorted  FastAPI , with the obv boilerplate
+2. Then referred the port to the backend, i.e. coach_test
+3. Then in this phase i added the exception handling as well
+4. finally The backend was run and also using /docs and POST method I Checked all the possibilities as well!
+5. Finally all tests were donene
+
+# Phase 5: Frontend(React)
+### The One Part, in which Claude helped me the most, because idk React , because idk js at all
+This is almost 70% AI Coded, because I am not interested in the frontend at all...
+so its less ineresting for me, and here actually I used AI
