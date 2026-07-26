@@ -25,21 +25,6 @@ client = Groq(
     api_key=os.environ.get("GROQ_API_KEY"),
 )
 
-board = chess.Board()
-board.push_san("e4")
-board_string = str(board)
-info = stockfish_engine.analyse(board, chess.engine.Limit(time=0.5))
-maia_info = maia_engine.analyse(board, chess.engine.Limit(time=0.5))
-
-raw_score = info["score"].white().score()
-print("Raw score:", raw_score)
-best_move = board.san(info["pv"][0])
-#MAIA move here
-maia_move = board.san(maia_info["pv"][0])
-print("Maia's predicted move:", maia_move)
-print("Best move (SAN):", best_move)
-
-print(info)
 
 #THis is the Step 3 part, Describe eval function
 def describe_eval(raw_score):
@@ -58,46 +43,59 @@ def describe_eval(raw_score):
 #Phase 4 part:
 # function signature
 def get_coaching_feedback(fen, user_move, stockfish_engine, maia_engine, client):
-    pass 
+    board = chess.Board(fen)
+    info = stockfish_engine.analyse(board, chess.engine.Limit(time=0.5)) 
+    maia_info = maia_engine.analyse(board, chess.engine.Limit(time=0.5))
+    raw_score = info["score"].white().score()
+    best_move = board.san(info["pv"][0])
+    maia_move = board.san(maia_info["pv"][0])
 
-#This is the Phase 3 Part:
-user_move = "d5"
-def compare_move():
-     if user_move == best_move and maia_move == best_move:
-        return f"You've Chosen The Ideal Move"
-     elif user_move == best_move and maia_move != best_move:
-        return f"You've Chosen The Best Move"
-     elif user_move == maia_move and maia_move != best_move:
-        return f"Good Move,Typical Human Move"
-     elif user_move != maia_move and user_move!= best_move and maia_move != best_move:
-        return f"Understandable Miss, No Worries"
-     elif user_move != maia_move and user_move!= best_move and maia_move == best_move:
-        return f"Learnable Mistake"
-     else:
-         return f"Error Occured"
+ #This is the Phase 3 Part:(Now nested here, in phase 4)
+    def compare_move(user_move, best_move, maia_move):
+        if user_move == best_move and maia_move == best_move:
+            return f"You've Chosen The Ideal Move"
+        elif user_move == best_move and maia_move != best_move:
+            return f"You've Chosen The Best Move"
+        elif user_move == maia_move and maia_move != best_move:
+            return f"Good Move,Typical Human Move"
+        elif user_move != maia_move and user_move!= best_move and maia_move != best_move:
+            return f"Understandable Miss, No Worries"
+        elif user_move != maia_move and user_move!= best_move and maia_move == best_move:
+            return f"Learnable Mistake"
+        else:
+            return f"Error Occured"
 #Now we use the function to compare(Phase 3 part)
-comparison_result = compare_move()
-print("Comparison result:", comparison_result)
+    comparison_result = compare_move(user_move, best_move, maia_move)
+    print("Comparison result:", comparison_result)
 
-#final Prompt part, below is the previous one, before adding MAIA
-#prompt = f"I'm a RAIT CHESS, I'm an AI Chess coach talking to a beginner. In this position, the best move is {best_move}, and {describe_eval(raw_score)}. Explain in one encouraging sentence why {best_move} is a good move here, without mentioning centipawns, evaluations, or engine terminology."
-prompt = f"I'm RAIT CHESS, an AI chess coach talking to a beginner. In this position, the best move is {best_move}, and {describe_eval(raw_score)}. The player played {user_move}. {comparison_result}. Explain in one or two encouraging sentences, referencing this specific situation, without mentioning centipawns, evaluations, or engine terminology."
 
-#This is the last Part
-#This is justt integrating the groq part, i did this in step 1
-chat_completion = client.chat.completions.create(
-    messages=[
-        {
-            "role": "user",
-            "content": prompt,
-        }
-    ],
-    model="llama-3.3-70b-versatile",
-)
-print(chat_completion.choices[0].message.content)
+    #final Prompt part, below is the previous one, before adding MAIA
+    #prompt = f"I'm a RAIT CHESS, I'm an AI Chess coach talking to a beginner. In this position, the best move is {best_move}, and {describe_eval(raw_score)}. Explain in one encouraging sentence why {best_move} is a good move here, without mentioning centipawns, evaluations, or engine terminology."
+    prompt = f"I'm RAIT CHESS, an AI chess coach talking to a beginner. In this position, the best move is {best_move}, and {describe_eval(raw_score)}. The player played {user_move}. {comparison_result}. Explain in one or two encouraging sentences, referencing this specific situation, without mentioning centipawns, evaluations, or engine terminology."
 
+    #This is the last Part
+    #This is justt integrating the groq part, i did this in step 1
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        model="llama-3.3-70b-versatile",
+    )
+    return chat_completion.choices[0].message.content
+
+
+'''
+Actually I learned on importing Python Immediately runs the code, so both engines would quit before even executing, so thats why im
+commenting them out in Phase 4:
+
+result = get_coaching_feedback(chess.STARTING_FEN, "d5", stockfish_engine, maia_engine, client)
+print(result)
 #Phase 2 Completion marks here with quitting the ngine yaaaaahhhhhh
 stockfish_engine.quit()
 #Time to Quit the MAIA engine too!
 maia_engine.quit()
 # So Adding the MAIA, i.e Updating the entire stockfish coach test file with lc0 and maia was a part of phase 3
+'''
