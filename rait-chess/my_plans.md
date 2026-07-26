@@ -1,3 +1,4 @@
+# Phase 1-3
 ## First I did everything with Stockfish
 1.  Built the explore.py
 2.  Then Read the docs of Groq API, and done the setup for llm test
@@ -16,3 +17,8 @@
 3.  If Maia and Stockfish disagree with each other, and user matches Maia → also good, they played the human move
 4.  If user matches neither, and Maia/Stockfish agreed with each other → this is your clearest "real, learnable mistake" case
 5.  If user matches neither, and Maia/Stockfish also disagreed with each other → gentler tone, since even the "human standard" move wasn't obvious
+
+## Adding the function get coaching feedback
+This replaced the test moves with the actual ones, and thats it, and now I'll move to the next step, which is nothing but the Phase 4
+
+# Phase 4: FastAPI
