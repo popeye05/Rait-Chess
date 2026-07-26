@@ -55,7 +55,10 @@ def describe_eval(raw_score):
             return f"{side} has clear advantage"
     else:
          return f"{side} is completely winning"
-    
+#Phase 4 part:
+# function signature
+def get_coaching_feedback(fen, user_move, stockfish_engine, maia_engine, client):
+    pass 
 
 #This is the Phase 3 Part:
 user_move = "d5"
