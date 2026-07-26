@@ -22,7 +22,7 @@ info = engine.analyse(board, chess.engine.Limit(time=0.5))
 print("Evaluation:", info["score"])
 print("Best line (principal variation):", info["pv"])
 
-result = engine.play(board, chess.engine.Limit(time=0.5))
-print("Best move:", result.move)
+maia_move = board.san(info["pv"][0])
+print("Maia's predicted move:", maia_move)
 
 engine.quit()
