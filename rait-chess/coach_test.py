@@ -42,8 +42,15 @@ def describe_eval(raw_score):
          return f"{side} is completely winning"
 #Phase 4 part:
 # function signature
+
+
 def get_coaching_feedback(fen, user_move, stockfish_engine, maia_engine, client):
     board = chess.Board(fen)
+    try:
+        board.parse_san(user_move)
+    except ValueError:
+        return "That doesn't look like a legal move in this position — please double check and try again."
+
     info = stockfish_engine.analyse(board, chess.engine.Limit(time=0.5)) 
     maia_info = maia_engine.analyse(board, chess.engine.Limit(time=0.5))
     raw_score = info["score"].white().score()
