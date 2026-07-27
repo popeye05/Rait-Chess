@@ -7,7 +7,12 @@ Most "AI chess coaches" are just a chess engine wrapped in a chat box: they tell
 ---
 ## Screenshots
 ![Homepage](RC%20Screenshots/homepage.png)
- 
+Its the Basic Homepage, when you setup it.
+Then theres
+![e4](RC%20Screenshots/e4.png)
+e4 which is a good move, was correctly judged, But if you see below:
+![Nf6](RC%20Screenshots/Nf6.png)
+NF6 is a Wrong Move/Bad move, so to say, that has been judged as well
 ## Basially What Happens is:
  
 A raw chess engine answers one question: *"what's the objectively best move?"*
