@@ -5,6 +5,8 @@
 Most "AI chess coaches" are just a chess engine wrapped in a chat box: they tell you the objectively best move and an evaluation number. That's not coaching. Rait Chess is built around a different idea — a coach that reasons about what a player at *your* skill level would realistically see or miss, and explains moves the way a real coach would: in plain chess language, not centipawns.
  
 ---
+## Screenshots
+![Homepage](RC_Screenshots/homepage.png)
  
 ## Basially What Happens is:
  
