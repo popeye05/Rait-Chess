@@ -6,7 +6,7 @@ Most "AI chess coaches" are just a chess engine wrapped in a chat box: they tell
  
 ---
 ## Screenshots
-![Homepage](RC_Screenshots/homepage.png)
+![Homepage](RC%20Screenshots/homepage.png)
  
 ## Basially What Happens is:
  
