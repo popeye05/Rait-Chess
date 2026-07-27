@@ -33,3 +33,6 @@ Ok, This was a little hard step, and a lot of things was unknown so I had to tak
 ### The One Part, in which Claude helped me the most, because idk React , because idk js at all
 This is almost 70% AI Coded, because I am not interested in the frontend at all...
 so its less ineresting for me, and here actually I used AI
+Funny Thing is, I learned There is already a thing called REACT Chessboard, so importing that did the 90% work
+The only important thing was **adding the CORS policy** 
+Finally,after the All the Setup, The project was done
